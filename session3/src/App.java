@@ -3,6 +3,9 @@ public class App {
         Circle circleABC = new Circle("circle ABC", 7.0);
         circleABC.getInfo();
 
+        Rectangle rectangle1 = new Rectangle("persegi panjang", 5, 10);
+        rectangle1.getInfo();
+
         ScaleneTriangle triangle1 = new ScaleneTriangle("segitiga sembarang", 6, 8, 10);
         triangle1.getInfo();
 
