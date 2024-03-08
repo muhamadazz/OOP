@@ -7,12 +7,12 @@ public class Shape {
         this.name = name;
     }
 
-    public double getArea(){
-        return area;
+    public void getArea(){
+        System.err.println(area);
     }
 
-    public double getPerimeter(){
-        return perimeter;
+    public void getPerimeter(){
+        System.err.println(perimeter);
     }
 
     public void getInfo(){
