@@ -1,5 +1,5 @@
-class Cash extends Pembayaran {
-    public void bayar(int jumlahUang, int totalHarga) {
-        super.bayar(jumlahUang, totalHarga);
+public class Cash extends Pembayaran {
+    public Cash(int jumlahUang, int totalHarga) {
+        super(jumlahUang, totalHarga);
     }
 }

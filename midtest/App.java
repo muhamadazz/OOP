@@ -55,17 +55,17 @@ public class App {
 
         // Lakukan pembayaran
         if (metodePembayaran == 1) {
-            Cash cash = new Cash();
             System.out.print("Masukkan jumlah uang: ");
             int jumlahUang = scanner.nextInt();
             int totalHarga = pemesanan.hitungTotalHarga();
-            cash.bayar(jumlahUang, totalHarga);
+            Cash cash = new Cash(jumlahUang, totalHarga);
+            cash.bayar();
         } else if (metodePembayaran == 2) {
-            Transfer transfer = new Transfer();
             System.out.print("Masukkan jumlah uang: ");
             int jumlahUang = scanner.nextInt();
             int totalHarga = pemesanan.hitungTotalHarga();
-            transfer.bayar(jumlahUang, totalHarga);
+            Transfer transfer = new Transfer(jumlahUang, totalHarga);
+            transfer.bayar();
         } else {
             System.out.println("Pilihan tidak valid.");
         }
