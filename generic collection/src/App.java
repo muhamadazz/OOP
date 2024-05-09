@@ -17,7 +17,6 @@ public class App {
 
         for(int i = 0 ; i < name.length(); i++){
             if (i == name.length()/ 2) {
-                // System.out.println(name.substring(0, 1 + i) +"*".repeat(name.length()) );
                 System.out.println(name);
             } else{
                 System.out.println("***"+name.charAt(i)+"***");
