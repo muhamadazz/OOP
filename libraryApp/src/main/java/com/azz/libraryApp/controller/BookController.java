@@ -1,26 +1,24 @@
 package com.azz.libraryApp.controller;// BookController.java
 import com.azz.libraryApp.model.Book;
-import com.azz.libraryApp.repository.BookRepository;
+import com.azz.libraryApp.service.BookService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 @RestController
 @RequestMapping("/api-books/")
 public class BookController {
-
-    private final BookRepository BookRepository;
-
-    public BookController(com.azz.libraryApp.repository.BookRepository bookRepository) {
-        BookRepository = bookRepository;
-    }
+    @Autowired
+    private BookService bookService;
 
     @GetMapping("/get-books")
-    public List<Book> getAllBooks() {
-        return BookRepository.findAll();
+    public List<Book> getBooks() {
+        return bookService.getAllBooks();
     }
 
     @PostMapping("/add-book")
-    public Book createBook(@RequestBody Book book) {
-        return BookRepository.save(book);
+    public Book addBook(@RequestBody Book book) {
+        return bookService.saveBook(book);
     }
+
 }

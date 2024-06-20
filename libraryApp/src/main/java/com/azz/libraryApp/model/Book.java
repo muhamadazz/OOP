@@ -16,6 +16,7 @@ public class Book {
     private String title;
     private String description;
     private int qty;
+    private int booked;
 
     public Long getIdbook() {
         return idbook;
@@ -71,5 +72,13 @@ public class Book {
 
     public void setQty(int qty) {
         this.qty = qty;
+    }
+
+    public int getBooked() {
+        return booked;
+    }
+
+    public void setBooked(int booked) {
+        this.booked = booked;
     }
 }

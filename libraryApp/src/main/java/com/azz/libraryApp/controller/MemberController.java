@@ -1,53 +1,47 @@
 package com.azz.libraryApp.controller;
 import com.azz.libraryApp.model.Member;
-import com.azz.libraryApp.repository.MemberRepository;
+import com.azz.libraryApp.service.MemberService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/api")
 public class MemberController {
-
-    private final MemberRepository memberRepository;
-
-    public MemberController(MemberRepository memberRepository) {
-        this.memberRepository = memberRepository;
-    }
+    @Autowired
+    private MemberService memberService;
 
     @GetMapping("member")
-    public List<Member> getAllMembers() {
-        return memberRepository.findAll();
+    public List<Member> getMembers() {
+        return memberService.getAll();
     }
 
     @GetMapping("member/{id}")
-    public Optional<Member> getMemberById(@PathVariable("id") Long id_member) {
-        return memberRepository.findById(id_member);
+    public Member getMember(@PathVariable Long id) {
+        return memberService.getById(id);
     }
 
     @PostMapping("member")
-    public Member createMember(@RequestBody Member member) {
-        return memberRepository.save(member);
+    public Member addMember(@RequestBody Member member) {
+        return memberService.save(member);
     }
+
     @PutMapping("member/{id}")
-    public Member updateMember(@PathVariable("id") Long idmember, @RequestBody Member memberDetails) {
-        Optional<Member> memberOptional = memberRepository.findById(idmember);
-        if (memberOptional.isPresent()) {
-            Member member = memberOptional.get();
-            member.setName(memberDetails.getName());
-            member.setEmail(memberDetails.getEmail());
-            member.setIdnumber(memberDetails.getIdnumber());
-            member.setAddress(memberDetails.getAddress());
-            member.setPhone(memberDetails.getPhone());
-            return memberRepository.save(member);
-        } else {
-            throw new RuntimeException("Member not found with id " + idmember);
+    public ResponseEntity<Member> updateMember(@PathVariable Long id, @RequestBody Member updatedMember) {
+        try {
+            Member member = memberService.update(id, updatedMember);
+            return ResponseEntity.ok(member);
+        } catch (RuntimeException e) {
+            return ResponseEntity.notFound().build();
         }
     }
 
     @DeleteMapping("member/{id}")
-    public void deleteMember(@PathVariable("id") Long id_member) {
-        memberRepository.deleteById(id_member);
+    public void deleteMember(@PathVariable Long id) {
+        memberService.delete(id);
     }
+
+
 }
